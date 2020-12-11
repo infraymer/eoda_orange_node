@@ -44,12 +44,12 @@ app.post('/sendOrder', async function (req, res) {
     } catch (error) {
         if (error instanceof OrangeDataError) {
             console.log('При обработке возникла ошибка OrangeData, она содержит дополнительные сведения:');
-            console.log(util.inspect(error, { colors: true, depth: null }));
+            console.log(util.inspect(error, { depth: null }));
             res.status(400).send('OrangeDataError');
             return;
         }
         console.log('Стандартная ошибка node.js возникла при обработке запроса:');
-        console.log(util.inspect(error, { colors: true, depth: null }));
+        console.log(util.inspect(error, { depth: null }));
         res.status(400).send(`NodeJsError,${error}`);
     }
 })
@@ -60,7 +60,7 @@ app.get('/checkOrder', async function (req, res) {
         let agent = req.query.isTest ? agentTest : agentProd;
         const status = await agent.getOrderStatus(req.body.inn, req.body.id);
         if (status) {
-            console.log(util.inspect(status, { colors: true, depth: null }));
+            console.log(util.inspect(status, { depth: null }));
             res.status(200).send(true);
         } else {
             res.status(200).send(false);
@@ -68,12 +68,12 @@ app.get('/checkOrder', async function (req, res) {
     } catch (error) {
         if (error instanceof OrangeDataError) {
             console.log('При обработке возникла ошибка OrangeData, она содержит дополнительные сведения:');
-            console.log(util.inspect(error, { colors: true, depth: null }));
+            console.log(util.inspect(error, { depth: null }));
             res.status(400).send('OrangeDataError');
             return;
         }
         console.log('Стандартная ошибка node.js возникла при обработке запроса:');
-        console.log(util.inspect(error, { colors: true, depth: null }));
+        console.log(util.inspect(error, { depth: null }));
         res.status(400).send(`NodeJsError,${error}`);
     }
 })
