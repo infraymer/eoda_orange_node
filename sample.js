@@ -11,12 +11,20 @@ const key = fs.readFileSync('./keys/client.key');
 const passphrase = '1234';
 const ca = fs.readFileSync('./keys/cacert.pem');
 const privateKey = fs.readFileSync('./keys/private_key.pem');
-const apiUrl = 'https://apip.orangedata.ru:2443/api/v2';
+
+const apiUrlTest = 'https://apip.orangedata.ru:2443/api/v2';
+//const apiUrlProd = 'https://api.orangedata.ru:12003/api/v2';
+
+const apiUrl = apiUrlTest;
 
 const agent = new OrangeData({ apiUrl, cert, key, passphrase, ca, privateKey });
+
+// 5902059146
+// 7725713770
 const order = new Order({
     id: crypto.randomBytes(18).toString('hex'),
     inn: '5902059146',
+    key: '5902059146',
     group: 'Main',
     type: 1, // Приход
     customerContact: '+79991234567',

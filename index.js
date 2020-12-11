@@ -9,20 +9,31 @@ app.use(express.json())
 
 const { OrangeData, Order } = require('node-orangedata');
 const { OrangeDataError } = require('node-orangedata/lib/errors');
+const OrangeData = require('node-orangedata/lib/OrangeData');
 // const Order = require('node-orangedata/lib/Order');
 
-const cert = fs.readFileSync('./keys/client.crt');
-const key = fs.readFileSync('./keys/client.key');
-const passphrase = '1234';
-const ca = fs.readFileSync('./keys/cacert.pem');
-const privateKey = fs.readFileSync('./keys/private_key.pem');
-const apiUrl = 'https://apip.orangedata.ru:2443/api/v2';
+const prod_cert = fs.readFileSync('./keys/client.crt');
+const prod_key = fs.readFileSync('./keys/client.key');
+const prod_passphrase = '1234';
+const prod_ca = fs.readFileSync('./keys/cacert.pem');
+const prod_privateKey = fs.readFileSync('./keys/private_key.pem');
 
-const agent = new OrangeData({ apiUrl, cert, key, passphrase, ca, privateKey });
+const test_cert = fs.readFileSync('./keys/client.crt');
+const test_key = fs.readFileSync('./keys/client.key');
+const test_passphrase = '1234';
+const test_ca = fs.readFileSync('./keys/cacert.pem');
+const test_privateKey = fs.readFileSync('./keys/private_key.pem');
+
+const apiUrlProd = 'https://api.orangedata.ru:12003/api/v2';
+const apiUrlTest = 'https://apip.orangedata.ru:2443/api/v2';
+
+const agentProd = new OrangeData({ apiUrlTest, test_cert, test_key, test_passphrase, test_ca, test_privateKey });
+const agentTest = new OrangeData({ apiUrlProd, prod_cert, prod_key, prod_passphrase, prod_ca, prod_privateKey });
 
 app.post('/sendOrder', async function (req, res) {
     console.log('Отправка чека онлайн-кассе...');
     try {
+        let agent = req.query.isTest ? agentTest : agentProd; 
         const requestOrder = req.body;
         const order = new Order(requestOrder);
         await requestOrder.positions.forEach((e) => order.addPosition(e));
@@ -46,6 +57,7 @@ app.post('/sendOrder', async function (req, res) {
 app.get('/checkOrder', async function (req, res) {
     console.log('Проверка чека в онлайн-кассе...');
     try {
+        let agent = req.query.isTest ? agentTest : agentProd;
         const status = await agent.getOrderStatus(req.body.inn, req.body.id);
         if (status) {
             console.log(util.inspect(status, { colors: true, depth: null }));
