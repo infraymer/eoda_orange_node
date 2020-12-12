@@ -12,17 +12,19 @@ const { OrangeDataError } = require('node-orangedata/lib/errors');
 // const OrangeData = require('node-orangedata/lib/OrangeData');
 // const Order = require('node-orangedata/lib/Order');
 
-const prod_cert = fs.readFileSync('./keys/client.crt');
-const prod_key = fs.readFileSync('./keys/client.key');
-const prod_passphrase = '1234';
-const prod_ca = fs.readFileSync('./keys/cacert.pem');
-const prod_privateKey = fs.readFileSync('./keys/private_key.pem');
 
-const test_cert = fs.readFileSync('./keys/client.crt');
-const test_key = fs.readFileSync('./keys/client.key');
+
+const prod_cert = fs.readFileSync(path.join(__dirname, 'keys/client.crt'));
+const prod_key = fs.readFileSync(path.join(__dirname, 'keys/client.key'));
+const prod_passphrase = '1234';
+const prod_ca = fs.readFileSync(path.join(__dirname, 'keys/cacert.pem'));
+const prod_privateKey = fs.readFileSync(path.join(__dirname, './keys/private_key.pem'));
+
+const test_cert = fs.readFileSync(path.join(__dirname, 'keys/client.crt'));
+const test_key = fs.readFileSync(path.join(__dirname, 'keys/client.key'));
 const test_passphrase = '1234';
-const test_ca = fs.readFileSync('./keys/cacert.pem');
-const test_privateKey = fs.readFileSync('./keys/private_key.pem');
+const test_ca = fs.readFileSync(path.join(__dirname, 'keys/cacert.pem'));
+const test_privateKey = fs.readFileSync(path.join(__dirname, 'keys/private_key.pem'));
 
 const apiUrlProd = 'https://api.orangedata.ru:12003/api/v2';
 const apiUrlTest = 'https://apip.orangedata.ru:2443/api/v2';
