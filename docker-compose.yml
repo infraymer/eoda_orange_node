@@ -1,0 +1,29 @@
+version: "3.6"
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    container_name: eoda-api
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./keys:/app/keys:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.eoda-api.entrypoints=http"
+      - "traefik.http.routers.eoda-api.rule=Host(`eoda.devhoster.ru`)"
+      - "traefik.http.middlewares.eoda-api-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.eoda-api.middlewares=eoda-api-https-redirect"
+      - "traefik.http.routers.eoda-api-secure.entrypoints=https"
+      - "traefik.http.routers.eoda-api-secure.rule=Host(`eoda.devhoster.ru`)"
+      - "traefik.http.routers.eoda-api-secure.tls=true"
+      - "traefik.http.routers.eoda-api-secure.tls.certresolver=http"
+      - "traefik.http.routers.eoda-api-secure.service=eoda-api"
+      - "traefik.http.services.eoda-api.loadbalancer.server.port=3000"
+    networks:
+      - net
+
+networks:
+  net:
+    external: true
