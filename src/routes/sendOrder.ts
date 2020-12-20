@@ -8,10 +8,17 @@ export default asyncWrapper(async (req: Request, res: Response, next: NextFuncti
 
   const requestOrder = req.body as OrderConfig
   
+  console.log('Body', requestOrder)
+  
   const orderConfig = {...requestOrder}
   delete orderConfig.positions
   delete orderConfig.payments
+  
+  console.log('OrderConfig', orderConfig)
+  
   const order = new Order(orderConfig)
+  
+  console.log('Order', order)
 
   if (requestOrder.positions)
     for (const position of requestOrder.positions) {
