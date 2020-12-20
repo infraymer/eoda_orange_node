@@ -13,13 +13,15 @@ export default asyncWrapper(async (req: Request, res: Response, next: NextFuncti
   delete orderConfig.payments
   const order = new Order(orderConfig)
 
-  for (const position of requestOrder.positions) {
-    await order.addPosition(position)
-  }
+  if (requestOrder.positions)
+    for (const position of requestOrder.positions) {
+      await order.addPosition(position)
+    }
 
-  for (const payment of requestOrder.payments) {
-    await order.addPayment(payment)
-  }
+  if (requestOrder.payments)
+    for (const payment of requestOrder.payments) {
+      await order.addPayment(payment)
+    }
 
   await agent.sendOrder(order)
 
