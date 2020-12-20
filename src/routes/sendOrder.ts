@@ -7,7 +7,11 @@ export default asyncWrapper(async (req: Request, res: Response, next: NextFuncti
   const agent = req.query.isTest ? testAgent : prodAgent
 
   const requestOrder = req.body as OrderConfig
-  const order = new Order(requestOrder)
+  
+  const orderConfig = {...requestOrder}
+  delete orderConfig.positions
+  delete orderConfig.payments
+  const order = new Order(orderConfig)
 
   for (const position of requestOrder.positions) {
     await order.addPosition(position)
