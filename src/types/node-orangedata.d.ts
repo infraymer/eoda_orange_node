@@ -25,8 +25,8 @@ export type OrderConfig = {
   customerINN: string
   taxationSystem: number
 
-  positions: OrderPosition[]
-  payments: OrderPayment[]
+  positions?: OrderPosition[]
+  payments?: OrderPayment[]
 }
 
 export type OrderPosition = {
