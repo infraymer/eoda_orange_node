@@ -18,6 +18,7 @@ export class OrangeData {
 export type OrderConfig = {
   id: string
   inn: string
+  key: string
   group: string
   type: number
   customerContact: string
@@ -27,6 +28,7 @@ export type OrderConfig = {
 
   positions?: OrderPosition[]
   payments?: OrderPayment[]
+  agent: any
 }
 
 export type OrderPosition = {
