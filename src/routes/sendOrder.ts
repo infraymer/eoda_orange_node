@@ -7,17 +7,17 @@ export default asyncWrapper(async (req: Request, res: Response, next: NextFuncti
   const agent = req.query.isTest ? testAgent : prodAgent
 
   const requestOrder = req.body as OrderConfig
-  
+
   console.log('Body', requestOrder)
-  
-  const orderConfig = {...requestOrder}
+
+  const orderConfig = { ...requestOrder }
   delete orderConfig.positions
   delete orderConfig.payments
-  
+
   console.log('OrderConfig', orderConfig)
-  
+
   const order = new Order(orderConfig)
-  
+
   console.log('Order', order)
 
   if (requestOrder.positions)
@@ -29,6 +29,9 @@ export default asyncWrapper(async (req: Request, res: Response, next: NextFuncti
     for (const payment of requestOrder.payments) {
       await order.addPayment(payment)
     }
+
+  if (requestOrder.agent)
+    order.addAgent(requestOrder.agent)
 
   await agent.sendOrder(order)
 
