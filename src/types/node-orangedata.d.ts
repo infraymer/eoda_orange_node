@@ -28,7 +28,8 @@ export type OrderConfig = {
 
   positions?: OrderPosition[]
   payments?: OrderPayment[]
-  agent: any
+  agent: any,
+  userAttribute: any,
 }
 
 export type OrderPosition = {

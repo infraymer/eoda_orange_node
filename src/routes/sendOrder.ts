@@ -33,6 +33,9 @@ export default asyncWrapper(async (req: Request, res: Response, next: NextFuncti
   if (requestOrder.agent)
     order.addAgent(requestOrder.agent)
 
+  if (requestOrder.userAttribute)
+    order.addUserAttribute(requestOrder.userAttribute)
+
   await agent.sendOrder(order)
 
   res.send({ success: true })
