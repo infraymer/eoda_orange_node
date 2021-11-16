@@ -1,13 +1,14 @@
+import { NextFunction, Request, Response } from 'express'
+import { Order, OrderConfig, ServerErrorResponse } from 'node-orangedata'
 import { asyncWrapper } from '../shared/helper'
-import { Request, Response, NextFunction } from 'express'
-import { testAgent, prodAgent } from '../shared/orangedata'
-import { Order, OrderConfig } from 'node-orangedata'
+import { prodAgent, testAgent } from '../shared/orangedata'
 
 export default asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
   const agent = req.query.isTest ? testAgent : prodAgent
 
   const requestOrder = req.body as OrderConfig
 
+  console.log('===============REQUEST===============')
   console.log('Body', requestOrder)
 
   const orderConfig = { ...requestOrder }
@@ -30,13 +31,21 @@ export default asyncWrapper(async (req: Request, res: Response, next: NextFuncti
       await order.addPayment(payment)
     }
 
-  if (requestOrder.agent)
-    order.addAgent(requestOrder.agent)
+  if (requestOrder.agent) order.addAgent(requestOrder.agent)
 
-  if (requestOrder.userAttribute)
-    order.addUserAttribute(requestOrder.userAttribute)
+  if (requestOrder.userAttribute) order.addUserAttribute(requestOrder.userAttribute)
 
-  await agent.sendOrder(order)
+  try {
+    await agent.sendOrder(order)
+    console.log('===============RESPONSE===============')
+    console.log('Запрос выполнен успешно!')
+  } catch (e) {
+    console.log('===============RESPONSE===============')
+    console.log(e)
+    console.log(JSON.stringify(e as ServerErrorResponse))
+    res.status(400).send(e as ServerErrorResponse)
+    return
+  }
 
-  res.send({ success: true })
+  res.send()
 })

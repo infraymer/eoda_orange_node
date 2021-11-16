@@ -28,8 +28,8 @@ export type OrderConfig = {
 
   positions?: OrderPosition[]
   payments?: OrderPayment[]
-  agent: any,
-  userAttribute: any,
+  agent: any
+  userAttribute: any
 }
 
 export type OrderPosition = {
@@ -79,4 +79,14 @@ export class Order {
 
 export class Correction {
   constructor(order: Order)
+}
+
+export type ServerErrorResponse = {
+  name: string
+  message: string
+  errors: string[]
+  sentData: any
+  request: any
+  response: any
+  stack: any
 }

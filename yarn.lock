@@ -1511,14 +1511,14 @@ negotiator@0.6.2:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
 
-node-orangedata@^1.1.12:
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/node-orangedata/-/node-orangedata-1.1.12.tgz#32b51193537de16f4f9ae4a408055502e862428b"
-  integrity sha512-OUHLPsklO9oLVUgS9TEP+psmfwwLNVVU0HFWteZoPmzI2fRkWIxyI6yRrrn+L9w10odhCPA4s2S8SsSgLNTYQw==
+node-orangedata@^1.2.1:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/node-orangedata/-/node-orangedata-1.2.2.tgz#12f1c82782ce0eb74ca8fe260bd5753fd27f6ded"
+  integrity sha512-SYyAFMx3mSD9vRu3IOwZ8XZnW418jWees+s1dEw7lo0FqLATqvIHr//b8PLqmdzWeLzhzzwhKzb/IDrWS+Cp9w==
   dependencies:
     request "^2.88.0"
     request-promise-native "^1.0.8"
-    validator "^12.0.0"
+    validator "^13.6.0"
 
 nodemon@^2.0.6:
   version "2.0.6"
@@ -2239,10 +2239,10 @@ v8-compile-cache@^2.0.3:
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.2.0.tgz#9471efa3ef9128d2f7c6a7ca39c4dd6b5055b132"
   integrity sha512-gTpR5XQNKFwOd4clxfnhaqvfqMpqEwr4tOtCyz4MtYZX2JYhfr1JvBFKdS+7K/9rfpZR3VLX+YWBbKoxCgS43Q==
 
-validator@^12.0.0:
-  version "12.2.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-12.2.0.tgz#660d47e96267033fd070096c3b1a6f2db4380a0a"
-  integrity sha512-jJfE/DW6tIK1Ek8nCfNFqt8Wb3nzMoAbocBF6/Icgg1ZFSBpObdnwVY2jQj6qUqzhx5jc71fpvBWyLGO7Xl+nQ==
+validator@^13.6.0:
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.7.0.tgz#4f9658ba13ba8f3d82ee881d3516489ea85c0857"
+  integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
 
 vary@~1.1.2:
   version "1.1.2"
